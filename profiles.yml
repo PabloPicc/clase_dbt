@@ -1,0 +1,13 @@
+clase_dbt:
+    target: dev
+    outputs:
+        dev:
+            type: postgres
+            host: localhost
+            user: catedra
+            password: S3cret
+            port: 5432
+            dbname: catedra
+            schema: public
+            threads: 1
+            connect_timeout: 30

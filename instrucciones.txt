@@ -1,1 +1,49 @@
-python -m pip install dbt-ADAPTER_NAME
+python -m pip install dbt-ADAPTER_NAME --en nuestro caso el adapter es postgres
+
+Luego, iniciamos el repositorio estándar con dbt init
+
+Con dbt debug nos aseguramos que la conexion esta bien, básicamente esto funcionará si los .yaml están donde tienen que estar
+Estoy hablando del .yaml de profiles y el de proyecto
+
+Tiramos un modelito simple para mostrar como es la mecánica
+(creamos un archivito .sql y luego mandamos dbt run). Esto también sirve para mostrar que lo que se crea por default
+es una vista. NO una tabla.
+
+Luego comenzamos a ponernos serios, analizamos el DAG que quermos armar:
+
+Que la fuente sean listen_events y page_view_events. Que el objetivo sea:
+
+*Crear una etapa de staging en donde, a partir del ts, creamos campos de dia, mes y año, solo traer los campos pertinentes
+
+*Luego, a partir de esta etapa de staging, crear 2 etapas "gold". Una que sea la canción mas escuchada por ciudad y 
+mes/año
+
+*Otra que sea las ciudades ordenadas por mayor cantidad de tiempo escuchando música por año/mes
+
+*Otra que, a partir de page_view_events, te contabilice los put y los get por ciudad y estado.
+
+*Joinear esta última con cualquiera de las 2 otras.
+
+*Solo las tablas agregadas deben ser tablas, el resto views
+
+*Documentar las columnas pertinentes. Explicar en un archivo markdown el significado de las siglas de los estados de 
+EEUU y lo que significa GET y POST
+
+Con los chicos hacer el camino completo de page_views, dejarle el resto a ellos
+
+Manos a la obra con el DAG: primero seteamos un .yaml de sources para manejarnos con el.
+
+Luego creamos el modelo de staging para page_views
+
+Luego la tabla agregada
+
+Y, por último, para ver el dag hacemos dbt docs generate + debt docs serve y te abre el puerto 8080.
+
+
+
+
+
+
+
+
+

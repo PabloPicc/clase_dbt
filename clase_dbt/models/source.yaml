@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+    - name: eventsim
+      database: catedra
+      schema: public
+      tables:
+        - name: listen_events
+        - name: page_view_events
+

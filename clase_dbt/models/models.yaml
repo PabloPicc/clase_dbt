@@ -1,0 +1,58 @@
+models:
+
+  - name: listen_staging
+    description: Campos selectos de la tabla "listen_events". ts reformulado en fecha
+    columns:
+      - name: ts
+        description: milisegundos que pasaron desde el 1/1/1970
+      - name: city
+        description: ciudad en la que se genera el registro
+      - name: state
+        description: '{{ doc("state_name") }}'
+      - name: song
+        description: nombre de la canción
+      - name: artist
+        description: artista que canta la canción
+      - name: duration
+        description: duración de la canción
+      - name: mes
+      - name: day
+      - name: year
+     
+  - name: page_view_staging
+    description: suma de todos los tiempos de canciones escuchadas por ciudad y estado
+    columns:
+      - name: ts
+        description: milisegundos que pasaron desde el 1/1/1970
+      - name: city
+        description: ciudad en la que se genera el registro
+      - name: state
+        description: '{{ doc("state_name") }}'
+      - name: method
+        description: tipo de evento; puede ser PUT o GET
+      - name: fecha  
+        description: ts convertido en una fecha
+      - name: mes
+      - name: day
+      - name: year
+     
+  - name: listen_agg_duration
+    description: Canidad de segundos de canciones escuchadas por ciudad, estado y dia del mes
+    columns:
+      - name: total_duration
+        description: suma de las duraciones de las canciones, en segundos
+       
+  - name: listen_agg_songs
+    description: Canidad de veces que una canción es escuchada en determinada ciudad y estado
+    columns:
+      - name: n_songs
+        description: cantidad de veces que se escucha una canción
+     
+  - name: page_views_agg
+    description: Cantidad de eventos post o get por ciudad y estado
+    columns:
+      - name: n_events
+        description: cantidad de eventos (POST o GET)
+
+  - name: listen_pageviews
+    description: Merge entre page_views_agg and listen_agg_songs
